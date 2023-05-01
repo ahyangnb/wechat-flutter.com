@@ -1,0 +1,51 @@
+{
+  "root":"docs",
+  "title": "wechat_flutter 官网",
+  "author": "q1 zonggeu@163.com",
+  "description": "flutter中优秀的im开源项目。",
+  "language" : "zh-hans",
+  "links":{
+    "sharing": {
+      "all": null,
+      "facebook": null,
+      "google": null,
+      "twitter": null,
+      "weibo": null
+    },
+    "sidebar": {
+      "<div><img height=20 style='position:relative; top:5px; padding-right:5px ' src='http://www.flutterj.com/favicon.ico'/> Flutter教程网</div>": "http://www.flutterj.com/"
+    }
+  },
+  "styles": {
+    "website": "styles/website.css",
+    "ebook": "styles/ebook.css",
+    "pdf": "styles/pdf.css",
+    "mobi": "styles/mobi.css",
+    "epub": "styles/epub.css"
+  },
+  "plugins": [
+    "-search",
+    "search-pro",
+    "ace",
+    "splitter",
+    "prism",
+    "donate",
+    "-highlight"
+  ],
+  "pluginsConfig": {
+    "prism": {
+      "lang": {
+        "shell": "bash"
+      }
+    },
+    "search-pro": {
+      "cutWordLib": "nodejieba",
+      "defineWord" : ["Gitbook Use"]
+    },
+    "donate": {
+      "wechat": "http://www.flutterj.com/left_group.png",
+      "button": "入群",
+      "wechatText": "加入群聊交流"
+    }
+  }
+}

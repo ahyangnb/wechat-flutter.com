@@ -1,0 +1,992 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>2.4：开发路由管理框架 · wechat_flutter 官网</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="baidu-site-verification" content="Y34sAqDKUH"/>
+    <meta name="theme-color" content="#ffffff">
+    <!--<meta name="description" content="">-->
+    <meta name="description" content="《Flutter高级进阶》是Flutter教程网开源的电子书，主要帮助开发者进阶深入学习flutter。">
+    <meta name="keywords" content="flutter实战,flutter书籍,flutter电子书,flutter进阶 ">
+    <meta name="generator" content="GitBook 3.2.3">
+    
+    <meta name="author" content="q1 zonggeu@163.com">
+    
+    
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+    
+    
+    
+    <link rel="stylesheet" href="../gitbook/gitbook-plugin-ace/ace.css">
+    
+    
+    
+    <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+    
+    
+    
+    <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+    
+    
+    
+    <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+    
+    
+    
+    <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+    
+    
+    
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../chapter3/" />
+    
+    
+    <link rel="prev" href="no_context_route.html" />
+    
+
+    <style>
+        .pull-right > i {
+            font-size: 25px;
+            color: #777 !important;
+            cursor: pointer;
+
+        }
+
+        .pull-right > i:hover {
+            color: #777 !important;
+        }
+
+        body {
+            font-size: 15px !important;
+        }
+
+        a[href='../todo.html'], a[href='todo.html'] {
+            color: #888 !important;
+        }
+
+        .copyright {
+            text-align: center;
+            margin: 80px 16px 30px 16px;
+            padding-top: 16px;
+            border-top: #eee 1px solid;
+            color: grey;
+            font-size: .9em;
+        }
+
+        .ad {
+            color: white;
+            text-align: center;
+            background: url(https://img.alicdn.com/tfs/TB1Huu7vMmTBuNjy1XbXXaMrVXa-2880-400.png);
+            background-size: cover;
+            cursor: pointer;
+            margin-bottom: 30px;
+            padding: 18px
+        }
+
+        .ad:hover {
+            opacity: .8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.flutterj.com/" target="_blank" class="custom-link"><div><img height=20 style='position:relative; top:5px; padding-right:5px ' src='http://www.flutterj.com/favicon.ico'/> Flutter教程网</div></a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../chapter0/">
+            
+                <a href="../chapter0/">
+            
+                    
+                    环境搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../chapter1/">
+            
+                <a href="../chapter1/">
+            
+                    
+                    第1章：进阶篇
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../chapter1/life_cycle.html">
+            
+                <a href="../chapter1/life_cycle.html">
+            
+                    
+                    1.1：生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../chapter1/screen_widget.html">
+            
+                <a href="../chapter1/screen_widget.html">
+            
+                    
+                    1.2：屏幕适配之组件应用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../chapter1/screen_algorithm.html">
+            
+                <a href="../chapter1/screen_algorithm.html">
+            
+                    
+                    1.3：屏幕适配之屏幕算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../chapter1/widget_offset.html">
+            
+                <a href="../chapter1/widget_offset.html">
+            
+                    
+                    1.4：根据控件位置弹出对话框
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../chapter1/theme.html">
+            
+                <a href="../chapter1/theme.html">
+            
+                    
+                    1.5：App主题色控制及夜间模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../chapter1/upgrade.html">
+            
+                <a href="../chapter1/upgrade.html">
+            
+                    
+                    1.6：App内更新并自动打开安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第2章：优化篇
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="partial_refresh.html">
+            
+                <a href="partial_refresh.html">
+            
+                    
+                    2.1：局部刷新优化性能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="route.html">
+            
+                <a href="route.html">
+            
+                    
+                    2.2：路由管理控制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="no_context_route.html">
+            
+                <a href="no_context_route.html">
+            
+                    
+                    2.3：干掉context进行路由管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.4" data-path="my_route.html">
+            
+                <a href="my_route.html">
+            
+                    
+                    2.4：开发路由管理框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../chapter3/">
+            
+                <a href="../chapter3/">
+            
+                    
+                    第3章：原理篇
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../chapter3/setstate.html">
+            
+                <a href="../chapter3/setstate.html">
+            
+                    
+                    3.1：setState更新原理和流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../chapter3/run_app.html">
+            
+                <a href="../chapter3/run_app.html">
+            
+                    
+                    3.2：runApp入口执行
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../chapter4/">
+            
+                <a href="../chapter4/">
+            
+                    
+                    第4章：状态篇
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../chapter4/steam.html">
+            
+                <a href="../chapter4/steam.html">
+            
+                    
+                    4.1：Bloc-Stream入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../chapter4/bloc.html">
+            
+                <a href="../chapter4/bloc.html">
+            
+                    
+                    4.2：Bloc-状态管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../chapter5/">
+            
+                <a href="../chapter5/">
+            
+                    
+                    第5章：架构篇
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../chapter5/mvvm.html">
+            
+                <a href="../chapter5/mvvm.html">
+            
+                    
+                    5.1：MVVM架构搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../chapter5/mvc.html">
+            
+                <a href="../chapter5/mvc.html">
+            
+                    
+                    5.2：MVC架构搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../wiki/">
+            
+                <a href="../wiki/">
+            
+                    
+                    Flutter Wiki
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../wiki/test_coverage.html">
+            
+                <a href="../wiki/test_coverage.html">
+            
+                    
+                    1.1：package:flutter的测试范围
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" >
+            
+                <a target="_blank" href="https://github.com/ahyangnb/flutter_interview">
+            
+                    
+                    Flutter面试题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+    <a class="btn pull-right" aria-label="GitHub">
+        <i class="fa fa-edit" title="编辑本文"></i>
+    </a>
+    <a class="btn pull-right" aria-label="GitHub" href="https://github.com/ahyangnb/flutter-advanced-book">
+        <i class="fa fa-github" title="查看本书开源项目"></i>
+    </a>
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >2.4：开发路由管理框架</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x5F00;&#x53D1;&#x8DEF;&#x7531;&#x7BA1;&#x7406;&#x6846;&#x67B6;">&#x5F00;&#x53D1;&#x8DEF;&#x7531;&#x7BA1;&#x7406;&#x6846;&#x67B6;</h1>
+<p>&#x770B;&#x5B8C;&#x4E4B;&#x524D;&#x4E24;&#x7BC7;&#x6211;&#x4EEC;&#x5B66;&#x4F1A;&#x4E86;&#xFF1A;</p>
+<ul>
+<li>&#x8DEF;&#x7531;&#x5165;&#x6808;&#x548C;&#x8DEF;&#x7531;&#x51FA;&#x6808;&#xFF1B;</li>
+<li>&#x8DEF;&#x7531;&#x8BB0;&#x5F55;&#xFF1B;</li>
+<li>&#x81EA;&#x5B9A;&#x4E49;&#x8DEF;&#x7531;&#x52A8;&#x753B;&#xFF1B;</li>
+<li>&#x8DEF;&#x7531;&#x4F20;&#x53C2;&#x548C;&#x56DE;&#x9000;&#x8DEF;&#x7531;&#xFF1B;</li>
+<li>&#x4F7F;&#x7528;NavigatorKey&#x8FDB;&#x884C;&#x8DEF;&#x7531;&#x7BA1;&#x7406;&#xFF1B;</li>
+</ul>
+<p>&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x4ECA;&#x5929;&#x5C31;&#x7528;&#x4E4B;&#x524D;&#x7684;&#x77E5;&#x8BC6;&#x6765;&#x81EA;&#x5DF1;&#x5F00;&#x53D1;&#x4E00;&#x4E2A;&#x5C5E;&#x4E8E;&#x81EA;&#x5DF1;&#x7684;&#x8DEF;&#x7531;&#x7BA1;&#x7406;&#x6846;&#x67B6;&#xFF0C;&#x8FD9;&#x8282;&#x6240;&#x7528;&#x5230;&#x7684;&#x77E5;&#x8BC6;&#x5C31;&#x662F;&#x8DEF;&#x7531;&#x5C01;&#x88C5;&#x65B9;&#x6CD5;&#xFF0C;
+&#x8FD9;&#x6837;&#x4F7F;&#x7528;&#x8D77;&#x6765;&#x53EA;&#x9700;&#x4F20;&#x4E2A;&#x65B0;&#x9875;&#x9762;&#x5373;&#x53EF;&#x8DF3;&#x8F6C;&#x4E86;&#xFF0C;&#x6216;&#x8005;&#x968F;&#x4FBF;&#x4F20;&#x4E2A;&#x81EA;&#x5DF1;&#x60F3;&#x8981;&#x7684;&#x53C2;&#x6570;&#x5373;&#x53EF;&#x5B9E;&#x73B0;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x8DEF;&#x7531;&#x8FC7;&#x5EA6;&#x52A8;&#x753B;&#x4E86;&#xFF1B;</p>
+<h1 id="&#x5F00;&#x5E72;">&#x5F00;&#x5E72;</h1>
+<h5 id="&#x521B;&#x5EFA;&#xFF1A;">&#x521B;&#x5EFA;&#xFF1A;</h5>
+<pre class="language-"><code class="lang-bash">flutter create <span class="token parameter variable">--template</span><span class="token operator">=</span>package nav_router
+</code></pre>
+<p><code>nav_router</code>&#x4E3A;&#x63D2;&#x4EF6;&#x540D;&#x5B57;&#xFF0C;&#x6211;&#x8FD9;&#x8FB9;&#x7528;&#x6211;&#x81EA;&#x5DF1;&#x7684;&#x3002;</p>
+<h5 id="&#x8DEF;&#x7531;&#x8FC7;&#x5EA6;&#x52A8;&#x753B;&#x679A;&#x4E3E;&#xFF1A;">&#x8DEF;&#x7531;&#x8FC7;&#x5EA6;&#x52A8;&#x753B;&#x679A;&#x4E3E;&#xFF1A;</h5>
+<pre class="language-"><code class="lang-dart"><span class="token keyword">enum</span> <span class="token class-name">RouterType</span> <span class="token punctuation">{</span>
+  material<span class="token punctuation">,</span> <span class="token comment">// &#x9ED8;&#x8BA4;</span>
+  cupertino<span class="token punctuation">,</span> <span class="token comment">// cupertino&#x98CE;&#x683C;</span>
+  slide<span class="token punctuation">,</span> <span class="token comment">// &#x6ED1;&#x52A8;</span>
+  scale<span class="token punctuation">,</span> <span class="token comment">// &#x7F29;&#x653E;</span>
+  rotation<span class="token punctuation">,</span> <span class="token comment">// &#x65CB;&#x8F6C;</span>
+  size<span class="token punctuation">,</span> <span class="token comment">// &#x5927;&#x5C0F;&#x5C3A;&#x5BF8;</span>
+  fade<span class="token punctuation">,</span> <span class="token comment">// &#x6E10;&#x53D8;</span>
+  scaleRotate<span class="token punctuation">,</span> <span class="token comment">// &#x7F29;&#x653E;&#x548C;&#x65CB;&#x8F6C;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="&#x5B9A;&#x4E49;navigatorkey&#xFF1A;">&#x5B9A;&#x4E49;NavigatorKey&#xFF1A;</h5>
+<pre class="language-"><code class="lang-dart"><span class="token keyword">final</span> navGK <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GlobalKey</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">NavigatorState</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h5 id="&#x5C01;&#x88C5;&#x8DF3;&#x8F6C;&#x65B9;&#x6CD5;&#xFF1A;">&#x5C01;&#x88C5;&#x8DF3;&#x8F6C;&#x65B9;&#x6CD5;&#xFF1A;</h5>
+<p>&#x76EE;&#x524D;&#x6F14;&#x793A;<code>Push</code>&#x65B9;&#x6CD5;&#xFF0C;&#x5176;&#x4ED6;&#x65B9;&#x6CD5;&#x53EF;&#x67E5;&#x770B;&#x672C;&#x6587;&#x6700;&#x540E;&#x7684;git&#x9879;&#x76EE;&#x5730;&#x5740;&#x6216;&#x8005;&#x67E5;&#x770B;<code>Navigator</code>&#x81EA;&#x5DF1;&#x6162;&#x6162;&#x8865;&#x4E0A;&#xFF1B;</p>
+<pre class="language-"><code class="lang-dart"><span class="token comment">/// &#x63A5;&#x6536;&#x4E00;&#x4E2A;&#x9875;&#x9762;</span>
+<span class="token comment">/// &#x8DEF;&#x7531;&#x52A8;&#x753B;&#x7C7B;&#x578B;&#x5982;&#x679C;&#x6CA1;&#x4F20;&#x5219;&#x9ED8;&#x8BA4;&#x4E3A;cupertino&#x98CE;&#x683C;</span>
+<span class="token class-name">Future</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token keyword">dynamic</span><span class="token punctuation">&gt;</span></span> <span class="token function">routePush</span><span class="token punctuation">(</span><span class="token class-name">Widget</span> page<span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token class-name">RouterType</span> type <span class="token operator">=</span> <span class="token class-name">RouterType</span><span class="token punctuation">.</span>cupertino<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">Route</span> route <span class="token operator">=</span> <span class="token function">routerUtil</span><span class="token punctuation">(</span>type<span class="token punctuation">:</span> type<span class="token punctuation">,</span> widget<span class="token punctuation">:</span> page<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// &#x4F7F;&#x7528;navGK&#x8FDB;&#x884C;&#x8DEF;&#x7531;&#x8DF3;&#x8F6C;</span>
+  <span class="token keyword">return</span> navGK<span class="token punctuation">.</span>currentState<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>route<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="routerutil&#xFF1A;">routerUtil&#xFF1A;</h5>
+<p>&#x7528;<code>switch</code>&#x6765;&#x5224;&#x65AD;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;&#x54EA;&#x4E2A;&#x8DEF;&#x7531;&#x8FC7;&#x5EA6;&#x52A8;&#x753B;&#xFF1B;</p>
+<pre class="language-"><code class="lang-dart"><span class="token class-name">Route</span> <span class="token function">routerUtil</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token class-name">RouterType</span> type<span class="token punctuation">,</span> widget<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">Route</span> route<span class="token punctuation">;</span>
+  <span class="token comment">// &#x4F7F;&#x7528;type&#x6765;case</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// &#x5982;&#x679C;type&#x4E3A;RouterType.material</span>
+    <span class="token keyword">case</span> <span class="token class-name">RouterType</span><span class="token punctuation">.</span>material<span class="token punctuation">:</span>
+      <span class="token comment">// &#x6267;&#x884C;materialRoute&#x65B9;&#x6CD5;</span>
+      route <span class="token operator">=</span> <span class="token function">materialRoute</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span><span class="token comment">// &#x540E;&#x9762;&#x7684;&#x4EE5;&#x6B64;&#x7C7B;&#x63A8;</span>
+    <span class="token keyword">case</span> <span class="token class-name">RouterType</span><span class="token punctuation">.</span>cupertino<span class="token punctuation">:</span>
+      route <span class="token operator">=</span> <span class="token function">cupertinoRoute</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token class-name">RouterType</span><span class="token punctuation">.</span>slide<span class="token punctuation">:</span>
+      route <span class="token operator">=</span> <span class="token function">slide</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token class-name">RouterType</span><span class="token punctuation">.</span>scale<span class="token punctuation">:</span>
+      route <span class="token operator">=</span> <span class="token function">scale</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token class-name">RouterType</span><span class="token punctuation">.</span>rotation<span class="token punctuation">:</span>
+      route <span class="token operator">=</span> <span class="token function">rotation</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token class-name">RouterType</span><span class="token punctuation">.</span>size<span class="token punctuation">:</span>
+      route <span class="token operator">=</span> <span class="token function">size</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token class-name">RouterType</span><span class="token punctuation">.</span>fade<span class="token punctuation">:</span>
+      route <span class="token operator">=</span> <span class="token function">fade</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token class-name">RouterType</span><span class="token punctuation">.</span>scaleRotate<span class="token punctuation">:</span>
+      route <span class="token operator">=</span> <span class="token function">scaleRotate</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token comment">// &#x8FD4;&#x56DE;&#x6700;&#x7EC8;&#x7684;route</span>
+  <span class="token keyword">return</span> route<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="router&#xFF1A;">router&#xFF1A;</h5>
+<p>&#x90A3;&#x4E48;&#x6211;&#x4EEC;case&#x7684;&#x9700;&#x8981;&#x6267;&#x884C;&#x7684;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x4E5F;&#x662F;&#x9700;&#x8981;&#x5C01;&#x88C5;&#x4E0B;&#xFF1B;</p>
+<pre class="language-"><code class="lang-dart"><span class="token comment">// cupertino&#x98CE;&#x683C;&#x8DEF;&#x7531;&#x52A8;&#x753B;</span>
+<span class="token class-name">Route</span> <span class="token function">cupertinoRoute</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">CupertinoPageRoute</span><span class="token punctuation">(</span>
+    builder<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token class-name">BuildContext</span> context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> widget<span class="token punctuation">,</span>
+    settings<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">RouteSettings</span><span class="token punctuation">(</span>
+      name<span class="token punctuation">:</span> widget<span class="token punctuation">.</span><span class="token function">toStringShort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      isInitialRoute<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// material&#x98CE;&#x683C;&#x8DEF;&#x7531;&#x52A8;&#x753B;</span>
+<span class="token class-name">Route</span> <span class="token function">materialRoute</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">MaterialPageRoute</span><span class="token punctuation">(</span>
+    builder<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token class-name">BuildContext</span> context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> widget<span class="token punctuation">,</span>
+    settings<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">RouteSettings</span><span class="token punctuation">(</span>
+      name<span class="token punctuation">:</span> widget<span class="token punctuation">.</span><span class="token function">toStringShort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      isInitialRoute<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// &#x6ED1;&#x52A8;&#x8DEF;&#x7531;&#x52A8;&#x753B;</span>
+<span class="token class-name">Route</span> <span class="token function">slide</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token class-name">SlideRightRoute</span><span class="token punctuation">(</span>page<span class="token punctuation">:</span> widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// &#x7F29;&#x653E;&#x8DEF;&#x7531;&#x52A8;&#x753B;</span>
+<span class="token class-name">Route</span> <span class="token function">scale</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token class-name">ScaleRoute</span><span class="token punctuation">(</span>page<span class="token punctuation">:</span> widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// &#x65CB;&#x8F6C;&#x8DEF;&#x7531;&#x52A8;&#x753B;</span>
+<span class="token class-name">Route</span> <span class="token function">rotation</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token class-name">RotationRoute</span><span class="token punctuation">(</span>page<span class="token punctuation">:</span> widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// &#x5C3A;&#x5BF8;&#x5927;&#x5C0F;&#x8DEF;&#x7531;&#x52A8;&#x753B;</span>
+<span class="token class-name">Route</span> <span class="token function">size</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token class-name">SizeRoute</span><span class="token punctuation">(</span>page<span class="token punctuation">:</span> widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// &#x6E10;&#x53D8;&#x8DEF;&#x7531;&#x52A8;&#x753B;</span>
+<span class="token class-name">Route</span> <span class="token function">fade</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token class-name">FadeRoute</span><span class="token punctuation">(</span>page<span class="token punctuation">:</span> widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// &#x7F29;&#x653E;&#x52A0;&#x65CB;&#x8F6C;&#x8DEF;&#x7531;&#x52A8;&#x753B;</span>
+<span class="token class-name">Route</span> <span class="token function">scaleRotate</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token class-name">ScaleRotateRoute</span><span class="token punctuation">(</span>page<span class="token punctuation">:</span> widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="&#x52A8;&#x753B;&#x6267;&#x884C;&#x7C7B;&#xFF1A;">&#x52A8;&#x753B;&#x6267;&#x884C;&#x7C7B;&#xFF1A;</h5>
+<p>&#x8FD9;&#x91CC;&#x56E0;&#x4E3A;&#x592A;&#x591A;&#x4E86;&#x6211;&#x6682;&#x65F6;&#x5C31;&#x653E;&#x4E0B;&#x6E10;&#x53D8;&#x548C;&#x7F29;&#x653E;&#x7684;&#xFF1B;</p>
+<pre class="language-"><code class="lang-dart"><span class="token keyword">import</span> <span class="token string-literal"><span class="token string">&apos;package:flutter/material.dart&apos;</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">// &#x7F29;&#x653E;&#x8DEF;&#x7531;&#x52A8;&#x753B;</span>
+<span class="token keyword">class</span> <span class="token class-name">ScaleRoute</span> <span class="token keyword">extends</span> <span class="token class-name">PageRouteBuilder</span> <span class="token punctuation">{</span>
+<span class="token comment">// &#x63A5;&#x6536;&#x7684;&#x9875;&#x9762;page</span>
+  <span class="token keyword">final</span> <span class="token class-name">Widget</span> page<span class="token punctuation">;</span>
+  <span class="token comment">// &#x6784;&#x9020;</span>
+  <span class="token class-name">ScaleRoute</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>page<span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">:</span> <span class="token keyword">super</span><span class="token punctuation">(</span>
+    pageBuilder<span class="token punctuation">:</span> <span class="token punctuation">(</span>
+        <span class="token class-name">BuildContext</span> context<span class="token punctuation">,</span>
+        <span class="token class-name">Animation</span><span class="token generics"><span class="token punctuation">&lt;</span>double<span class="token punctuation">&gt;</span></span> animation<span class="token punctuation">,</span>
+        <span class="token class-name">Animation</span><span class="token generics"><span class="token punctuation">&lt;</span>double<span class="token punctuation">&gt;</span></span> secondaryAnimation<span class="token punctuation">,</span>
+        <span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span>
+    page<span class="token punctuation">,</span>
+    transitionsBuilder<span class="token punctuation">:</span> <span class="token punctuation">(</span>
+        <span class="token class-name">BuildContext</span> context<span class="token punctuation">,</span>
+        <span class="token class-name">Animation</span><span class="token generics"><span class="token punctuation">&lt;</span>double<span class="token punctuation">&gt;</span></span> animation<span class="token punctuation">,</span>
+        <span class="token class-name">Animation</span><span class="token generics"><span class="token punctuation">&lt;</span>double<span class="token punctuation">&gt;</span></span> secondaryAnimation<span class="token punctuation">,</span>
+        <span class="token class-name">Widget</span> child<span class="token punctuation">,</span>
+        <span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span>
+        <span class="token class-name">ScaleTransition</span><span class="token punctuation">(</span>
+          scale<span class="token punctuation">:</span> <span class="token class-name">Tween</span><span class="token generics"><span class="token punctuation">&lt;</span>double<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>
+            begin<span class="token punctuation">:</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token comment">// &#x5F00;&#x59CB;</span>
+            end<span class="token punctuation">:</span> <span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token comment">// &#x7ED3;&#x675F;</span>
+          <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">animate</span><span class="token punctuation">(</span>
+            <span class="token class-name">CurvedAnimation</span><span class="token punctuation">(</span>
+              parent<span class="token punctuation">:</span> animation<span class="token punctuation">,</span>
+              curve<span class="token punctuation">:</span> <span class="token class-name">Curves</span><span class="token punctuation">.</span>fastOutSlowIn<span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          child<span class="token punctuation">:</span> child<span class="token punctuation">,</span> <span class="token comment">// &#x9875;&#x9762;&#x5B58;&#x653E;</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// &#x6E10;&#x53D8;&#x8DEF;&#x7531;&#x52A8;&#x753B;</span>
+<span class="token keyword">class</span> <span class="token class-name">FadeRoute</span> <span class="token keyword">extends</span> <span class="token class-name">PageRouteBuilder</span> <span class="token punctuation">{</span>
+  <span class="token comment">// &#x63A5;&#x6536;&#x7684;&#x9875;&#x9762;page</span>
+  <span class="token keyword">final</span> <span class="token class-name">Widget</span> page<span class="token punctuation">;</span>
+  <span class="token comment">// &#x6784;&#x9020;</span>
+  <span class="token class-name">FadeRoute</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>page<span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">:</span> <span class="token keyword">super</span><span class="token punctuation">(</span>
+    pageBuilder<span class="token punctuation">:</span> <span class="token punctuation">(</span>
+        <span class="token class-name">BuildContext</span> context<span class="token punctuation">,</span>
+        <span class="token class-name">Animation</span><span class="token generics"><span class="token punctuation">&lt;</span>double<span class="token punctuation">&gt;</span></span> animation<span class="token punctuation">,</span>
+        <span class="token class-name">Animation</span><span class="token generics"><span class="token punctuation">&lt;</span>double<span class="token punctuation">&gt;</span></span> secondaryAnimation<span class="token punctuation">,</span>
+        <span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span>
+    page<span class="token punctuation">,</span>
+    transitionsBuilder<span class="token punctuation">:</span> <span class="token punctuation">(</span>
+        <span class="token class-name">BuildContext</span> context<span class="token punctuation">,</span>
+        <span class="token class-name">Animation</span><span class="token generics"><span class="token punctuation">&lt;</span>double<span class="token punctuation">&gt;</span></span> animation<span class="token punctuation">,</span>
+        <span class="token class-name">Animation</span><span class="token generics"><span class="token punctuation">&lt;</span>double<span class="token punctuation">&gt;</span></span> secondaryAnimation<span class="token punctuation">,</span>
+        <span class="token class-name">Widget</span> child<span class="token punctuation">,</span>
+        <span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span>
+        <span class="token class-name">FadeTransition</span><span class="token punctuation">(</span>
+          opacity<span class="token punctuation">:</span> animation<span class="token punctuation">,</span> <span class="token comment">// &#x6E10;&#x53D8;&#x7684;&#x900F;&#x660E;&#x5EA6;</span>
+          child<span class="token punctuation">:</span> child<span class="token punctuation">,</span><span class="token comment">// &#x9875;&#x9762;&#x5B58;&#x653E;</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x66F4;&#x591A;&#x8DEF;&#x7531;&#x52A8;&#x753B;&#x76F4;&#x63A5;&#x770B;&#xFF1A;</p>
+<ul>
+<li><a href="https://github.com/fluttercandies/nav_router/tree/master/lib/routers" target="_blank">https://github.com/fluttercandies/nav_router/tree/master/lib/routers</a></li>
+</ul>
+<h1 id="&#x4F7F;&#x7528;">&#x4F7F;&#x7528;</h1>
+<h5 id="&#x5F15;&#x5165;">&#x5F15;&#x5165;</h5>
+<p>&#x5047;&#x8BBE;&#x6211;&#x662F;&#x5728;&#x63D2;&#x4EF6;&#x7684;<code>example</code>&#x76EE;&#x5F55;&#x4F7F;&#x7528;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x5C31;&#x76F4;&#x63A5;path&#x65B9;&#x5F0F;&#x5F15;&#x5165;&#xFF1B;</p>
+<pre class="language-"><code class="lang-yaml"><span class="token key atrule">nav_router</span><span class="token punctuation">:</span>
+    <span class="token key atrule">path</span><span class="token punctuation">:</span> ../
+</code></pre>
+<h5 id="&#x5BFC;&#x5165;">&#x5BFC;&#x5165;</h5>
+<pre class="language-"><code class="lang-dart"><span class="token keyword">import</span> <span class="token string-literal"><span class="token string">&apos;package:nav_router/nav_router.dart&apos;</span></span><span class="token punctuation">;</span>
+</code></pre>
+<h5 id="&#x914D;&#x7F6E;">&#x914D;&#x7F6E;</h5>
+<p>&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684;&#x662F;<code>navigatorKey</code>&#x5F62;&#x5F0F;&#x8DF3;&#x8F6C;&#xFF0C;&#x6240;&#x4EE5;&#x5FC5;&#x987B;&#x5728;<code>MaterialApp</code>&#x7684;<code>navigatorKey</code>&#x914D;&#x7F6E;&#x597D;<code>Key</code>&#xFF0C;&#x5426;&#x5219;&#x65E0;&#x6CD5;&#x4F7F;&#x7528;&#xFF1B;</p>
+<pre class="language-"><code class="lang-dart"><span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token class-name">MyApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">MyApp</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span> <span class="token punctuation">{</span>
+  <span class="token metadata function">@override</span>
+  <span class="token class-name">Widget</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token class-name">BuildContext</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&apos;NavRoute&apos;</span></span><span class="token punctuation">,</span>
+      navigatorKey<span class="token punctuation">:</span> navGK<span class="token punctuation">,</span> <span class="token comment">// &#x5FC5;&#x987B;&#x914D;&#x7F6E;</span>
+      home<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">MyHomePage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="&#x8DEF;&#x7531;&#x8DF3;&#x8F6C;1&#xFF1A;">&#x8DEF;&#x7531;&#x8DF3;&#x8F6C;1&#xFF1A;</h5>
+<pre class="language-"><code class="lang-dart"><span class="token function">routePush</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">NewPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h5 id="&#x8DEF;&#x7531;&#x8DF3;&#x8F6C;2&#xFF1A;">&#x8DEF;&#x7531;&#x8DF3;&#x8F6C;2&#xFF1A;</h5>
+<pre class="language-"><code class="lang-dart"><span class="token function">routePush</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">NewPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">RouterType</span><span class="token punctuation">.</span>fade<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h1 id="end">End</h1>
+<p>&#x672C;&#x6587;&#x8DEF;&#x7531;&#x7BA1;&#x7406;&#x6846;&#x67B6;GitHub&#x9879;&#x76EE;&#x5730;&#x5740;&#xFF1A;</p>
+<ul>
+<li><a href="https://github.com/fluttercandies/nav_router" target="_blank">https://github.com/fluttercandies/nav_router</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="no_context_route.html" class="navigation navigation-prev " aria-label="Previous page: 2.3：干掉context进行路由管理">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../chapter3/" class="navigation navigation-next " aria-label="Next page: 第3章：原理篇">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"2.4：开发路由管理框架","level":"1.4.4","depth":2,"next":{"title":"第3章：原理篇","level":"1.5","depth":1,"path":"chapter3/index.md","ref":"chapter3/index.md","articles":[{"title":"3.1：setState更新原理和流程","level":"1.5.1","depth":2,"path":"chapter3/setstate.md","ref":"chapter3/setstate.md","articles":[]},{"title":"3.2：runApp入口执行","level":"1.5.2","depth":2,"path":"chapter3/run_app.md","ref":"chapter3/run_app.md","articles":[]}]},"previous":{"title":"2.3：干掉context进行路由管理","level":"1.4.3","depth":2,"path":"chapter2/no_context_route.md","ref":"chapter2/no_context_route.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","search-pro","ace","splitter","prism","donate","-highlight","livereload"],"root":"docs","styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"prism":{"lang":{"shell":"bash"}},"ace":{},"livereload":{},"splitter":{},"search-pro":{"cutWordLib":"nodejieba","defineWord":["Gitbook Use"]},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"donate":{"alipay":"","alipayText":"支付宝打赏","button":"入群","title":"","wechat":"http://www.flutterj.com/left_group.png","wechatText":"加入群聊交流"},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"q1 zonggeu@163.com","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"wechat_flutter 官网","language":"zh-hans","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"<div><img height=20 style='position:relative; top:5px; padding-right:5px ' src='http://www.flutterj.com/favicon.ico'/> Flutter教程网</div>":"http://www.flutterj.com/"}},"gitbook":"*","description":"flutter中优秀的im开源项目。"},"file":{"path":"chapter2/my_route.md","mtime":"2021-05-23T05:21:56.542Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-04-30T13:41:17.026Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+
+
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ace/ace/ace.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ace/ace.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+
+<script>
+    var _hmt = _hmt || [];
+    $("#bd").remove();
+
+
+    function init() {
+        var p = location.pathname;
+        _hmt.push(['_trackPageview', p]);
+        if (p[p.length - 1] === '/') {
+            p += "index.md"
+        } else {
+            p = p.split(".")[0] + ".md";
+        }
+        p = "https://github.com/ahyangnb/flutter-advanced-book/blob/master/docs" + p;
+        $(".pull-right .fa-edit").parent("a").attr("href", p);
+        $("table").wrap("<div style='overflow: auto'></div>");
+
+        $(".copyright").remove();
+        $("<div class='copyright'> 有错误欢迎提出，作者马上改进并红包奖赏。</div>").appendTo(".page-inner");
+    }
+
+    function hookAPI(api, ob, fn) {
+        return function () {
+            var result = api.apply(ob, [].slice.call(arguments));
+            setTimeout(fn, 1000);
+            return result;
+        }
+    }
+
+    function addAD() {
+        if (location.href !== 'http://book.flutterj.com/' && $("#book-search-results .ad").length == 0) {
+            var id=Math.ceil(Math.random()*10)%2;
+            $(".ad"+id).clone().hide().fadeIn().prependTo("#book-search-results")
+            setTimeout(function () {
+                $(".body-inner").animate({scrollTop: 0}, 200)
+            }, 800);
+        }
+    }
+
+    function _track(p,url) {
+        _hmt.push(['_trackEvent', 'ad', 'click', p]);
+        setTimeout(function () {
+            location.href = url
+        }, 100);
+    }
+
+    // setInterval(addAD, 300);
+
+    init();
+
+    if (history.pushState) {
+        history.pushState = hookAPI(history.pushState, history, init);
+    }
+
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</body>
+
+</html>
+
