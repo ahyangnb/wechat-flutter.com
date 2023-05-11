@@ -13,7 +13,7 @@
       "weibo": null
     },
     "sidebar": {
-      "<div><img height=20 style='position:relative; top:5px; padding-right:5px ' src='http://www.flutterj.com/favicon.ico'/> Flutter教程网</div>": "http://www.flutterj.com/"
+      "<div><img height=20 style='position:relative; top:5px; padding-right:5px ' src='../img/github_fluidicon.png'/> wechat_flutter</div>": "https://github.com/fluttercandies/wechat_flutter/"
     }
   },
   "styles": {
@@ -43,9 +43,9 @@
       "defineWord" : ["Gitbook Use"]
     },
     "donate": {
-      "wechat": "http://www.flutterj.com/left_group.png",
+      "wechat": "../img/join_group.jpg",
       "button": "入群",
-      "wechatText": "加入群聊交流"
+      "wechatText": "加群主好友入群聊交流"
     }
   }
 }
